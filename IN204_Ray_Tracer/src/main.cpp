@@ -4,20 +4,20 @@
 #include <iostream>
 
 int main(int argc, const char** argv) {
-    std::cout << "Hello world" << std::endl;
+    std::cout << "Hello Matteo" << std::endl;
 
     sf::Window window(sf::VideoMode(800, 600), "My window");
 
 
-    /*sf::ContextSettings settings;
+    sf::ContextSettings settings;
     settings.depthBits = 24;
     settings.stencilBits = 8;
     settings.antialiasingLevel = 4;
     settings.majorVersion = 3;
     settings.minorVersion = 0;
-    sf::Window window_gl(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, settings);
-    glEnable(GL_TEXTURE_2D);*/
-
+    sf::Window window_gl(sf::VideoMode(800, 600), "OpenGL works !!", sf::Style::Default, settings);
+    glEnable(GL_TEXTURE_2D);
+    
     // on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
     while (window.isOpen()) {
         // on inspecte tous les évènements de la fenêtre qui ont été émis depuis la
