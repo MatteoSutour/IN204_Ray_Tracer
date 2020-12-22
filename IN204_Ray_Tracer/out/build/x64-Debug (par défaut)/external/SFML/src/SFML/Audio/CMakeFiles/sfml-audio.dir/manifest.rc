@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+2 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/UTILISATEUR/Documents/ENSTA/2A/IN204/IN204_Ray_Tracer/IN204_Ray_Tracer/out/build/x64-Debug (par défaut)/external/SFML/src/SFML/Audio/CMakeFiles/sfml-audio.dir/embed.manifest"
