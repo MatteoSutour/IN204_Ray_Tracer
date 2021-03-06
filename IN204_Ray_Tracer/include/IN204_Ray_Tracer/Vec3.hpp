@@ -20,6 +20,7 @@ public:
     }
     Vec3<T> operator * (const T& f) const { return Vec3<T>(x * f, y * f, z * f); }
     Vec3<T> operator * (const Vec3<T>& v) const { return Vec3<T>(x * v.x, y * v.y, z * v.z); }
+    Vec3<T> operator / (const T &r) { return Vec3<T>(r / x, r / y, r / z); } 
     T dot(const Vec3<T>& v) const { return x * v.x + y * v.y + z * v.z; }
     Vec3<T> operator - (const Vec3<T>& v) const { return Vec3<T>(x - v.x, y - v.y, z - v.z); }
     Vec3<T> operator + (const Vec3<T>& v) const { return Vec3<T>(x + v.x, y + v.y, z + v.z); }
