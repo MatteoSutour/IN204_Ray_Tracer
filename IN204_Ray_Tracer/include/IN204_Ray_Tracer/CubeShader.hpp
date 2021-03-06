@@ -3,17 +3,17 @@
 #include <SFML/OpenGL.hpp>
 #include <iostream>
 
-class Cube {
+class CubeShader {
 private:
     float cote;
     float* pos;
 
 public:
 
-    explicit Cube(float myCote, float myPos[3]) : cote(myCote), pos(myPos) {};
-    ~Cube() {};
+    explicit CubeShader(float myCote, float myPos[3]) : cote(myCote), pos(myPos) {};
+    ~CubeShader() {};
 
-    void renderCube(float cote, float* centre) {
+    void renderCubeShader(float cote, float* centre) {
         // Code pour le Vertex Shader (Position)
         const char* vertexShaderSource = "#version 330 core\n"
             "layout (location = 0) in vec3 aPos;\n"
@@ -93,18 +93,18 @@ public:
             std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
         }
 
-        //Shader Program : fait le lien entre les shaders combin�s
+        //Shader Program : fait le lien entre les shaders combinés
         unsigned int shaderProgram;
         shaderProgram = glCreateProgram();
         glAttachShader(shaderProgram, vertexShader);
         glAttachShader(shaderProgram, fragmentShader);
         glLinkProgram(shaderProgram);
         glUseProgram(shaderProgram);
-        //On n'a plus besoin des vertex et fragment shaders li�s dans le shader program :
+        //On n'a plus besoin des vertex et fragment shaders liés dans le shader program :
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
 
-        //On doit sp�cifier comment OpenGL interprete les donn�es de sommets :
+        //On doit spécifier comment OpenGL interprete les données de sommets :
         glBindVertexArray(VBO);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);

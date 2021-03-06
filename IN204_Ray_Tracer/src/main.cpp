@@ -1,5 +1,5 @@
 #include "IN204_Ray_Tracer/IN204_Ray_Tracer.hpp"
-#include "IN204_Ray_Tracer/Cube.hpp"
+#include "IN204_Ray_Tracer/CubeShader.hpp"
 #include "IN204_Ray_Tracer/Vec3.hpp"
 #include "IN204_Ray_Tracer/Sphere.hpp"
 #include "IN204_Ray_Tracer/lancerRayon.hpp"
@@ -49,7 +49,7 @@ int main(int argc, const char** argv) {
     // chargement des ressources, initialisation des états OpenGL, ...
 
     float pos[3] = { 0.0f, 0.0f, 0.0f };
-    Cube MyCube(0.5f, pos);
+    CubeShader MyCube(0.5f, pos);
 
     /*
     // Code pour le Vertex Shader (Position)
@@ -133,7 +133,7 @@ int main(int argc, const char** argv) {
     glEnableVertexAttribArray(0);
     */
 
-    MyCube.renderCube(0.5f, pos);
+    MyCube.renderCubeShader(0.5f, pos);
 
     // la boucle principale
     bool running = true;
