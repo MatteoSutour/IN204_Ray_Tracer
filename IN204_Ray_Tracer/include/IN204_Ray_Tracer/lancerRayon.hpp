@@ -48,13 +48,13 @@ Vec3f trace(
     // reverse the normal direction. That also means we are inside the sphere so set
     // the inside bool to true. Finally reverse the sign of IdotN which we want
     // positive.
-    float bias = 1e-4; // add some bias to the point from which we will be tracing 
+    float bias = 1e-4f; // add some bias to the point from which we will be tracing 
     bool inside = false;
     if (raydir.dot(nhit) > 0) nhit = -nhit, inside = true;
     if ((sphere->transparency > 0 || sphere->reflection > 0) && depth < MAX_RAY_DEPTH) {
         float facingratio = -raydir.dot(nhit);
         // change the mix value to tweak the effect
-        float fresneleffect = mix(pow(1 - facingratio, 3), 1, 0.1);
+        float fresneleffect = mix(pow(1 - facingratio, 3), 1, 0.1f);
         // compute reflection direction (not need to normalize because all vectors
         // are already normalized)
         Vec3f refldir = raydir - nhit * 2 * raydir.dot(nhit);
@@ -63,7 +63,7 @@ Vec3f trace(
         Vec3f refraction = 0;
         // if the sphere is also transparent compute refraction ray (transmission)
         if (sphere->transparency) {
-            float ior = 1.1, eta = (inside) ? ior : 1 / ior; // are we inside or outside the surface? 
+            float ior = 1.1f, eta = (inside) ? ior : 1 / ior; // are we inside or outside the surface? 
             float cosi = -nhit.dot(raydir);
             float k = 1 - eta * eta * (1 - cosi * cosi);
             Vec3f refrdir = raydir * eta + nhit * (eta * cosi - sqrt(k));
@@ -108,12 +108,12 @@ void render(const std::vector<Sphere>& spheres)
     Vec3f* image = new Vec3f[width * height], * pixel = image;
     float invWidth = 1 / float(width), invHeight = 1 / float(height);
     float fov = 30, aspectratio = width / float(height);
-    float angle = tan(M_PI * 0.5 * fov / 180.);
+    float angle = (float)(tan(M_PI * 0.5 * fov / 180.));
     // Trace rays
     for (unsigned y = 0; y < height; ++y) {
         for (unsigned x = 0; x < width; ++x, ++pixel) {
-            float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
-            float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
+            float xx = (float)((2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio);
+            float yy = (float)((1 - 2 * ((y + 0.5) * invHeight)) * angle);
             Vec3f raydir(xx, yy, -1);
             raydir.normalize();
             *pixel = trace(Vec3f(0), raydir, spheres, 0);
