@@ -3,6 +3,7 @@
 
 #include "Vec3.hpp"
 #include "Vec2.hpp"
+#include "Ray.hpp"
 #include <random>
 
 std::random_device rd; 
@@ -24,7 +25,7 @@ class Object {
     // Method to compute the intersection of the object with a ray
     // Returns true if an intersection was found, false otherwise
     // See method implementation in children class for details
-    virtual bool intersect(const Vec3f &, const Vec3f &, float &, float &) const = 0; 
+    virtual bool intersect(const Ray &, float &, float &) const = 0; 
     // Method to compute the surface data such as normal and texture coordnates at the intersection point.
     // See method implementation in children class for details
     //virtual void getSurfaceData(const Vec3f &, Vec3f &, Vec2f &) const = 0; 

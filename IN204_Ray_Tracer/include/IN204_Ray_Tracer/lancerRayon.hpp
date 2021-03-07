@@ -19,18 +19,19 @@ float mix(const float& a, const float& b, const float& mix)
 
 //This is the main trace function. It takes a ray as argument (defined by its origin and direction). We test if this ray intersects any of the geometry in the scene. If the ray intersects an object, we compute the intersection point, the normal at the intersection point, and shade this point using this information. Shading depends on the surface property (is it transparent, reflective, diffuse). The function returns a color for the ray. If the ray intersects an object that is the color of the object at the intersection point, otherwise it returns the background color.
 Vec3f trace(
-    const Vec3f& rayorig,
-    const Vec3f& raydir,
+    const Ray& ray,
     const std::vector<Sphere>& spheres,
     const int& depth)
 {
     //if (raydir.length() != 1) std::cerr << "Error " << raydir << std::endl;
+    Vec3f rayorig = ray.orig;
+    Vec3f raydir = ray.dir;
     float tnear = INFINITY;
     const Sphere* sphere = NULL;
     // find intersection of this ray with the sphere in the scene
     for (unsigned i = 0; i < spheres.size(); ++i) {
         float t0 = INFINITY, t1 = INFINITY;
-        if (spheres[i].intersect(rayorig, raydir, t0, t1)) {
+        if (spheres[i].intersect(ray, t0, t1)) {
             if (t0 < 0) t0 = t1;
             if (t0 < tnear) {
                 tnear = t0;
@@ -59,7 +60,7 @@ Vec3f trace(
         // are already normalized)
         Vec3f refldir = raydir - nhit * 2 * raydir.dot(nhit);
         refldir.normalize();
-        Vec3f reflection = trace(phit + nhit * bias, refldir, spheres, depth + 1);
+        Vec3f reflection = trace(Ray(phit + nhit * bias, refldir), spheres, depth + 1);
         Vec3f refraction = 0;
         // if the sphere is also transparent compute refraction ray (transmission)
         if (sphere->transparency) {
@@ -68,7 +69,7 @@ Vec3f trace(
             float k = 1 - eta * eta * (1 - cosi * cosi);
             Vec3f refrdir = raydir * eta + nhit * (eta * cosi - sqrt(k));
             refrdir.normalize();
-            refraction = trace(phit - nhit * bias, refrdir, spheres, depth + 1);
+            refraction = trace(Ray(phit - nhit * bias, refrdir), spheres, depth + 1);
         }
         // the result is a mix of reflection and refraction (if the sphere is transparent)
         surfaceColor = (
@@ -86,7 +87,7 @@ Vec3f trace(
                 for (unsigned j = 0; j < spheres.size(); ++j) {
                     if (i != j) {
                         float t0, t1;
-                        if (spheres[j].intersect(phit + nhit * bias, lightDirection, t0, t1)) {
+                        if (spheres[j].intersect(Ray(phit + nhit * bias, lightDirection), t0, t1)) {
                             transmission = 0;
                             break;
                         }
@@ -116,7 +117,7 @@ void render(const std::vector<Sphere>& spheres)
             float yy = (float)((1 - 2 * ((y + 0.5) * invHeight)) * angle);
             Vec3f raydir(xx, yy, -1);
             raydir.normalize();
-            *pixel = trace(Vec3f(0), raydir, spheres, 0);
+            *pixel = trace(Ray(Vec3f(0), raydir), spheres, 0);
         }
     }
     // Save result to a PPM image (keep these flags if you compile under Windows)

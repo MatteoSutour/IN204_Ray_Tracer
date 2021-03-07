@@ -3,6 +3,7 @@
 
 #include "Vec3.hpp"
 #include "Object.hpp"
+#include "Ray.hpp"
 #include <cmath> 
 
 class Sphere : public Object
@@ -19,8 +20,10 @@ public:
         const Vec3f& ec = 0) :
         Object(sc, refl, transp, ec), center(c), radius(r), radius2(r* r) {};
     //Compute a ray-sphere intersection using the geometric solution
-    bool intersect(const Vec3f& rayorig, const Vec3f& raydir, float& t0, float& t1) const
-    { 
+    bool intersect(const Ray& ray, float& t0, float& t1) const
+    {
+        Vec3f rayorig = ray.orig;
+        Vec3f raydir = ray.dir;
         Vec3f l = center - rayorig;
         float tca = l.dot(raydir);
         if (tca < 0) return false;
