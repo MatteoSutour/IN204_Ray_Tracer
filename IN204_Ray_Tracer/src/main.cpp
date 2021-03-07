@@ -14,17 +14,18 @@ int main(int argc, const char** argv) {
 
 
     //srand48(13);
-    std::vector<Sphere> spheres;
+    std::vector<std::unique_ptr<Object>> objects;
     // position, radius, surface color, reflectivity, transparency, emission color
-    spheres.push_back(Sphere(Vec3f(0.0, -10004, -20), 10000, Vec3f(0.20f, 0.20f, 0.20f), 0, 0.0));
-    spheres.push_back(Sphere(Vec3f(0.0, 0, -20), 4, Vec3f(1.00f, 0.32f, 0.36f), 1, 0.5));
-    spheres.push_back(Sphere(Vec3f(0.0, 0, -20), 4, Vec3f(1.00f, 0.32f, 0.36f), 1, 0.5));
-    spheres.push_back(Sphere(Vec3f(5.0, -1, -15), 2, Vec3f(0.90f, 0.76f, 0.46f), 1, 0.0));
-    spheres.push_back(Sphere(Vec3f(5.0, 0, -25), 3, Vec3f(0.65f, 0.77f, 0.97f), 1, 0.0));
-    spheres.push_back(Sphere(Vec3f(-5.5, 0, -15), 3, Vec3f(0.90f, 0.90f, 0.90f), 1, 0.0));
+    objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(0.0, -10004, -20), 10000, Vec3f(0.2f, 0.2f, 0.2f), 0.5, 0.0)));
+    objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(0.0, 0, -20), 4, Vec3f(1.00f, 0.32f, 0.36f), 1, 0.5)));
+    objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(0.0, 0, -20), 4, Vec3f(1.00f, 0.32f, 0.36f), 1, 0.5)));
+    objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(5.0, -1, -15), 2, Vec3f(0.90f, 0.76f, 0.46f), 1, 0.0)));
+    objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(5.0, 0, -25), 3, Vec3f(0.65f, 0.77f, 0.97f), 1, 0.0)));
+    objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(-5.5, 0, -15), 3, Vec3f(0.90f, 0.90f, 0.90f), 1, 0.0)));
     // light
-    spheres.push_back(Sphere(Vec3f(0.0, 20, -30), 3, Vec3f(0.00, 0.00, 0.00), 0, 0.0, Vec3f(3)));
-    render(spheres);
+    // Le dernier argument correspond à emissionColor, si emissionColor > 0 alors il s'agit d'une lumière.
+    objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(0.0, 20, -30), 3, Vec3f(0.00, 0.00, 0.00), 0, 0.0, Vec3f(3))));
+    render(objects);
 
 
     sf::ContextSettings settings;

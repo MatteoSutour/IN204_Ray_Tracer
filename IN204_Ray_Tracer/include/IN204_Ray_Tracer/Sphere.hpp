@@ -37,6 +37,13 @@ public:
 
         return true;
     }
+
+    Vec3f getNhit(const Vec3f & phit) const
+    {
+        Vec3f nhit = phit - center;
+        nhit.normalize();
+        return nhit;
+    }
 };
 
 #endif // !Sphere_HPP

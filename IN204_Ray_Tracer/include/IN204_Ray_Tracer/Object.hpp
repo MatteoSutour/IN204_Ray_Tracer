@@ -28,7 +28,7 @@ class Object {
     virtual bool intersect(const Ray &, float &, float &) const = 0; 
     // Method to compute the surface data such as normal and texture coordnates at the intersection point.
     // See method implementation in children class for details
-    //virtual void getSurfaceData(const Vec3f &, Vec3f &, Vec2f &) const = 0; 
+    virtual Vec3f getNhit(const Vec3f &) const = 0;
 };
 
 #endif // !Object_HPP

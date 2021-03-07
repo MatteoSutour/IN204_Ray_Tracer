@@ -2,6 +2,7 @@
 #define Cube_HPP
 
 #include "Vec3.hpp"
+#include "Ray.hpp"
 
 // Classe implémentant les AABB : Axis Aligned Bounding Box
 class Cube
