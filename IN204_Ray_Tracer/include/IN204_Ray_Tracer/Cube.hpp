@@ -66,13 +66,14 @@ public:
 
     Vec3f getNhit(const Vec3f & phit) const
     {
-        std::vector<float> dist;
-        dist[0] = abs(bounds[0].x - phit.x);
-        dist[1] = abs(bounds[0].y - phit.y);
-        dist[2] = abs(bounds[0].z - phit.z);
-        dist[3] = abs(bounds[1].x - phit.x);
-        dist[4] = abs(bounds[1].y - phit.y);
-        dist[5] = abs(bounds[1].z - phit.z);
+        std::vector<float> dist {
+            abs(bounds[0].x - phit.x),
+            abs(bounds[0].y - phit.y),
+            abs(bounds[0].z - phit.z),
+            abs(bounds[1].x - phit.x),
+            abs(bounds[1].y - phit.y),
+            abs(bounds[1].z - phit.z)
+        };
 
         int argmin = (int)std::distance(dist.begin(), std::min_element(dist.begin(), dist.end()));
 

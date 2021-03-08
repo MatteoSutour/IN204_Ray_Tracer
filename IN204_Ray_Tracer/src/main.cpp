@@ -23,7 +23,7 @@ int main(int argc, const char** argv) {
     objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(5.0, -1, -15), 2, Vec3f(0.90f, 0.76f, 0.46f), 1, 0.0)));
     objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(5.0, 0, -25), 3, Vec3f(0.65f, 0.77f, 0.97f), 1, 0.0)));
     objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(-5.5, 0, -15), 3, Vec3f(0.90f, 0.90f, 0.90f), 1, 0.0)));
-    //objects.push_back(std::unique_ptr<Object>(new Cube(Vec3f(-5.5, 0, -15), Vec3f(0, 5.5, -20.5), Vec3f(0.90f, 0.90f, 0.90f), 1, 0.0)));
+    objects.push_back(std::unique_ptr<Object>(new Cube(Vec3f(-5.5, 0, -15), Vec3f(0, 5.5, -20.5), Vec3f(0.90f, 0.90f, 0.90f), 1, 0.0)));
     // light
     // Le dernier argument correspond à emissionColor, si emissionColor > 0 alors il s'agit d'une lumière.
     objects.push_back(std::unique_ptr<Object>(new Sphere(Vec3f(0.0, 20, -30), 3, Vec3f(0.00, 0.00, 0.00), 0, 0.0, Vec3f(3))));
