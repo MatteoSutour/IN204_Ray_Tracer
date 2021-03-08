@@ -64,7 +64,7 @@ Vec3f trace(
         Vec3f refraction = 0;
         // if the sphere is also transparent compute refraction ray (transmission)
         if ((*object)->transparency) {
-            //ior : index of reflexion
+            //ior : index of refraction
             float ior = 1.1f, eta = (inside) ? ior : 1 / ior; // are we inside or outside the surface? 
             float cosi = -nhit.dot(raydir);
             float k = 1 - eta * eta * (1 - cosi * cosi);
